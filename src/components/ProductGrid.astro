@@ -9,7 +9,7 @@ import { products } from '../data/products';
 	<CategoryFilter />
 
 	{/* MODIFICADO: Usamos minmax con un límite inferior más amigable (380px) y el factor 1fr */}
-	<div class="grid grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))] justify-center justify-items-center gap-6 max-w-[1200px] w-full mx-auto">
+	<div class="grid grid-cols-[repeat(auto-fill,minmax(min(380px,100%),1fr))] justify-center justify-items-center gap-6 max-w-[1550px] w-full mx-auto">
 		{products.map((product) => <ProductCard product={product} />)}
 	</div>
 </section>
