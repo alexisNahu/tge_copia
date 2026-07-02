@@ -2,13 +2,16 @@
 import { categories } from '../data/products';
 ---
 
-<nav aria-label="Categorías de productos" class="flex flex-wrap justify-center gap-3 px-4 py-6 sm:px-8">
+<nav
+	aria-label="Categorías de productos"
+	class="no-scrollbar flex snap-x snap-proximity flex-nowrap justify-start gap-3 overflow-x-auto px-4 py-6 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-8"
+>
 	{
 		categories.map((category) => (
 			<button
 				type="button"
 				data-category={category}
-				class="category-btn flex h-[47px] w-[175px] shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-[20px] uppercase shadow-sm transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
+				class="category-btn flex h-[47px] w-[175px] shrink-0 snap-start items-center justify-center rounded-full border border-gray-200 bg-white text-[20px] uppercase shadow-sm transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
 				aria-pressed="false"
 			>
 				{category}
