@@ -12,7 +12,7 @@ const social = [
 
 <header class="absolute inset-x-0 top-0 z-20 flex px-11 w-full items-center justify-between py-4 mt-11">
 	<a href="#top" class="block transition-transform duration-300 hover:scale-105">
-		<Image src={logo} alt="TGE Electrodomésticos" class="h-[90px] w-[119px]" />
+		<Image src={logo} alt="TGE Electrodomésticos" class="md:h-[90px] md:w-[119px] h-[60px] w-[89px]" />
 	</a>
 	<div class="flex items-center gap-5">
 		{
@@ -31,9 +31,9 @@ const social = [
 					<a
 						href={item.href}
 						aria-label={item.label}
-						class="flex h-[55px] w-[55px] items-center justify-center rounded bg-black/40 p-1.5 transition-transform duration-200 hover:scale-110"
+						class="flex h-full w-full items-center justify-center rounded transition-transform duration-200 hover:scale-110"
 					>
-						<Image src={item.icon} alt="" class="h-full w-full object-contain" />
+						<Image src={item.icon} alt="" class="h-[55px] w-[55px] object-contain" />
 					</a>
 				))
 			}
