@@ -1,0 +1,78 @@
+---
+import logo from '../assets/logo_fontotransparente.png';
+import facebook from '../assets/uil_facebook.png';
+import instagram from '../assets/streamline_instagram-solid.png';
+import {Image} from 'astro:assets'
+const navLinks = [{ label: 'Descargar el catálogo', href: '#' }];
+const social = [
+	{ label: 'Facebook', href: '#', icon: facebook },
+	{ label: 'Instagram', href: '#', icon: instagram },
+];
+---
+
+<header class="absolute inset-x-0 top-0 z-20 flex max-w-[1600px] w-full mx-auto items-center justify-between px-6 py-4 sm:px-12 mt-11">
+	<a href="#top" class="block">
+		<Image src={logo} alt="TGE Electrodomésticos" class="h-[120px] w-auto" />
+	</a>
+	<div class="flex items-center gap-5">
+		{
+			navLinks.map((link) => (
+				<a
+					href={link.href}
+					class="hidden text-[20px] text-white uppercase hover:text-white/80 sm:inline"
+				>
+					{link.label}
+				</a>
+			))
+		}
+		<div class="flex items-center gap-2">
+			{
+				social.map((item) => (
+					<a
+						href={item.href}
+						aria-label={item.label}
+						class="flex h-[55px] w-[55px] items-center justify-center rounded bg-black/40 p-1.5"
+					>
+						<Image src={item.icon} alt="" class="h-full w-full object-contain" />
+					</a>
+				))
+			}
+		</div>
+	</div>
+</header>
+
+<div
+	id="sticky-nav"
+	class="fixed inset-x-0 top-0 z-50 mx-auto max-w-[1600px] -translate-y-full bg-white/95 shadow-md backdrop-blur transition-transform duration-300 ease-out"
+>
+	<div class="flex items-center justify-between px-6 py-3 sm:px-12">
+		<a href="#top" class="block">
+			<Image src={logo} alt="TGE Electrodomésticos" class="h-8 w-auto" />
+		</a>
+		<div class="flex items-center gap-5">
+			{
+				navLinks.map((link) => (
+					<a
+						href={link.href}
+						class="hidden text-xs font-semibold tracking-wide text-brand-indigo uppercase hover:text-brand-purple sm:inline"
+					>
+						{link.label}
+					</a>
+				))
+			}
+			<div class="flex items-center gap-2">
+				{
+					social.map((item) => (
+						<a
+							href={item.href}
+							aria-label={item.label}
+							class="flex h-7 w-7 items-center justify-center rounded bg-brand-indigo p-1.5"
+						>
+							<Image src={item.icon} alt="" class="h-full w-full object-contain" />
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</div>

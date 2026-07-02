@@ -1,0 +1,42 @@
+---
+import { categories } from '../data/products';
+---
+
+<nav aria-label="Categorías de productos" class="flex flex-wrap justify-center gap-3 px-4 py-6 sm:px-8">
+	{
+		categories.map((category) => (
+			<button
+				type="button"
+				data-category={category}
+				class="category-btn flex h-[47px] w-[175px] shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-[20px] uppercase shadow-sm transition-colors hover:border-brand-purple hover:text-brand-purple aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
+				aria-pressed="false"
+			>
+				{category}
+			</button>
+		))
+	}
+</nav>
+
+<script>
+	const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
+	const cards = document.querySelectorAll<HTMLElement>('.product-card');
+
+	buttons.forEach((button) => {
+		button.addEventListener('click', () => {
+			const alreadyActive = button.getAttribute('aria-pressed') === 'true';
+
+			buttons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+
+			if (alreadyActive) {
+				cards.forEach((card) => card.classList.remove('hidden'));
+				return;
+			}
+
+			button.setAttribute('aria-pressed', 'true');
+			const category = button.dataset.category;
+			cards.forEach((card) => {
+				card.classList.toggle('hidden', card.dataset.category !== category);
+			});
+		});
+	});
+</script>

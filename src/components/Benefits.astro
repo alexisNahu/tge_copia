@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import footerImage from '../assets/footer.png';
+import mano_regalo from '../assets/mano_regalo.png';
+import moneda from '../assets/moneda.png';
+import corazon from '../assets/corazon.png';
+
+const benefits = [
+	{
+		text: 'Comprá al contado con excelentes precios',
+		image: mano_regalo,
+	},
+	{
+		text: 'Llevá lo que necesitás en cómodas cuotas',
+		image: moneda,
+	},
+	{
+		text: 'Atención rápida, segura y personalizada',
+		image: corazon,
+	},
+];
+---
+
+{/* h-auto y padding para móviles; altura fija de 489px y centrado flex para desktop */}
+<section class="relative overflow-hidden py-16 h-auto md:h-[489px] flex items-center">
+	<Image src={footerImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
+	<div
+		class="absolute inset-0 bg-brand-pink/20">
+	>
+	</div>
+
+	{/* Ajustamos el ancho completo para que el grid se alinee bien al estar dentro de un flex */}
+	<div class="relative z-10 mx-auto grid w-full grid-cols-1 gap-12 px-6 text-center sm:grid-cols-3 max-w-[1600px]">
+		{
+			benefits.map((benefit) => (
+				<div class="flex flex-col items-center gap-6">
+					<Image
+						src={benefit.image}
+						alt=""
+						class="h-[66px] w-auto object-contain"
+					/>
+					<p class="text-white text-[24px] font-bold max-w-[350px] mx-auto leading-snug">
+						{benefit.text}
+					</p>
+				</div>
+			))
+		}
+	</div>
+</section>

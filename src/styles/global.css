@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../assets/fonts/Open_Sans/static/OpenSans-Italic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@theme {
+	--font-sans: 'Open Sans', ui-sans-serif, system-ui, sans-serif;
+	--color-brand-indigo: #2d2e82;
+	--color-brand-blue: #1d70b7;
+	--color-brand-pink: #c2489e;
+	--color-brand-purple: #4b3aa0;
+	--color-brand-teal: #2ecfad;
+	--color-brand-teal-dark: #17a98a;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-sans);
+}

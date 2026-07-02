@@ -1,0 +1,80 @@
+---
+import whatsapp from '../assets/ic_baseline-whatsapp.png';
+import type { Product } from '../data/products';
+import {Image} from "astro:assets";
+
+interface Props {
+	product: Product;
+}
+
+const { product } = Astro.props;
+
+const WHATSAPP_NUMBER = '595974283765';
+const message = `Hola, quiero hacer un pedido de ${product.name}`;
+const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+---
+
+<article
+	class="product-card relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-sm w-[465px] h-[522px]"
+	data-category={product.category}
+>
+	{
+		product.badge && (
+			<span class="absolute top-2 right-2 rounded bg-red-600 px-1.5 py-1 text-[9px] leading-none font-bold text-white z-10">
+             {product.badge}
+          </span>
+		)
+	}
+
+	{/* 1. Contenedor de la imagen (Arriba) */}
+	<div class="w-full h-64 flex items-center justify-center overflow-hidden">
+		<Image
+			src={product.image}
+			alt={product.name}
+			loading="lazy"
+			class="w-full h-full object-contain"
+		/>
+	</div>
+
+	{/* 2. Nombre del artículo (Ubicado inmediatamente abajo de la foto, alineado al inicio/arriba verticalmente) */}
+	<h3 class="text-center text-[32px] font-bold h-[96px] flex max-w-[370px] w-full mx-auto items-center justify-center line-clamp-2 overflow-hidden mt-2 leading-tight">
+		{product.name}
+	</h3>
+
+	{/* 3. Botones de acción (Abajo del nombre) */}
+	<div class="mt-auto flex justify-center gap-2">
+		<button
+			type="button"
+			class="price-toggle rounded-full bg-gradient-to-r from-brand-pink to-brand-purple px-6 py-1.5 text-[14px] text-white uppercase cursor-pointer"
+			aria-expanded="false"
+		>
+			Ver precios
+		</button>
+		<a
+			href={whatsappHref}
+			target="_blank"
+			rel="noopener noreferrer"
+			class="inline-flex items-center gap-1 rounded-full bg-brand-teal px-3 py-1.5 text-[14px] text-white uppercase hover:bg-brand-teal-dark"
+		>
+			<Image src={whatsapp} alt="" class="h-[14px] w-[14px] brightness-0 invert" />
+			Hacer pedido
+		</a>
+	</div>
+
+	{/* Panel de precios oculto */}
+	<div class="price-panel mt-4 hidden border-t border-gray-100 pt-3 text-center">
+		<p class="text-[10px] font-semibold tracking-wide text-gray-400 uppercase">Contado</p>
+		<p class="text-lg font-bold text-gray-900">Gs. {product.contado}</p>
+		<p class="mt-2 text-[10px] font-semibold tracking-wide text-gray-400 uppercase">Financiado</p>
+		<div class="mt-1 grid grid-cols-4 gap-1 text-[10px] text-gray-700">
+			{
+				product.financiado.map((cuota) => (
+					<div>
+						<span class="block font-semibold">{cuota.cuotas}x</span>
+						Gs. {cuota.monto}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</article>

@@ -1,0 +1,26 @@
+---
+import CategoryFilter from './CategoryFilter.astro';
+import ProductCard from './ProductCard.astro';
+import { products } from '../data/products';
+---
+
+<section class="bg-[#f5f4f9] px-4 pb-12 sm:px-8">
+	<CategoryFilter />
+	<div class="grid grid-cols-[repeat(auto-fill,min(465px,100%))] justify-center gap-6">
+		{products.map((product) => <ProductCard product={product} />)}
+	</div>
+</section>
+
+<script>
+	document.addEventListener('click', (event) => {
+		const button = (event.target as HTMLElement).closest<HTMLButtonElement>('.price-toggle');
+		if (!button) return;
+
+		const panel = button.closest('.product-card')?.querySelector('.price-panel');
+		if (!panel) return;
+
+		const expanded = button.getAttribute('aria-expanded') === 'true';
+		button.setAttribute('aria-expanded', String(!expanded));
+		panel.classList.toggle('hidden', expanded);
+	});
+</script>
