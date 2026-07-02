@@ -3,19 +3,21 @@ import { Image } from 'astro:assets';
 import banner from '../assets/banner.png';
 ---
 
-<section id="top" class="relative h-screen min-h-[560px] overflow-hidden">
+<section id="top" class="relative h-screen min-h-[560px] overflow-hidden w-full">
 	<Image
 		src={banner}
 		alt="Living room with a smart TV on a wooden stand"
 		class="absolute inset-0 h-full w-full object-cover animate-[ken-burns_20s_ease-in-out_infinite_alternate]"
 		fetchpriority="high"
 	/>
-	<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/30"></div>
+	<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30"></div>
+
 	<div class="relative z-10 flex h-full flex-col justify-end px-6 pb-8 sm:px-12 sm:pb-12">
-		<h1 class="text-3xl font-bold text-white sm:text-[64px] animate-[fade-in-up_0.8s_ease-out_both]">
+		<h1 class="text-3xl sm:text-5xl md:text-[64px] font-bold text-white leading-tight animate-[fade-in-up_0.8s_ease-out_both]">
 			Calidad y Confianza
 		</h1>
-		<p class="mt-2 text-sm text-white sm:text-[40px] animate-[fade-in-up_0.8s_ease-out_0.15s_both]">
+
+		<p class="mt-2 text-lg sm:text-2xl md:text-[40px] text-white leading-tight max-w-4xl animate-[fade-in-up_0.8s_ease-out_0.15s_both]">
 			Tecnología para tu hogar, al alcance de todos.
 		</p>
 	</div>
