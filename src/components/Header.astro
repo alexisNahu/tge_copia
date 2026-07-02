@@ -1,7 +1,7 @@
 ---
 import logo from '../assets/logo_fontotransparente.png';
-import facebook from '../assets/uil_facebook.png';
-import instagram from '../assets/streamline_instagram-solid.png';
+import facebook from '../assets/facebook_blanco.png';
+import instagram from '../assets/ig_blanco.png';
 import {Image} from 'astro:assets'
 const navLinks = [{ label: 'Descargar el catálogo', href: '#' }];
 const social = [
@@ -10,7 +10,7 @@ const social = [
 ];
 ---
 
-<header class="absolute inset-x-0 top-0 z-20 flex px-11 w-full items-center justify-between py-4 mt-11">
+<header class="absolute inset-x-0 top-0 z-20 flex md:px-11 px-6 w-full items-center justify-between py-4 md:mt-11 mt-3">
 	<a href="#top" class="block transition-transform duration-300 hover:scale-105">
 		<Image src={logo} alt="TGE Electrodomésticos" class="md:h-[90px] md:w-[119px] h-[60px] w-[89px]" />
 	</a>
