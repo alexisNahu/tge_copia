@@ -28,8 +28,9 @@ const social = [
 			{/* Contacto */}
 			<div class="flex items-start gap-3">
 				<Image src={whatsapp} alt="Whatsapp" class="h-[28px] w-[28px] mt-0.5 flex-shrink-0" />
-				<div>
-					<p class="text-[20px] uppercase">Contacto</p>
+				{/* Cambiado a flex-row con gap-2 en móvil, vuelve a flex-col en escritorio */}
+				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
+					<p class="text-[20px] uppercase ">Contacto:</p>
 					<p class="text-[20px]">0974 283765</p>
 				</div>
 			</div>
@@ -37,8 +38,9 @@ const social = [
 			{/* Financiación */}
 			<div class="flex items-start gap-3">
 				<Image src={seg} alt="Financiación" class="h-[24px] w-[27px] mt-0.5 flex-shrink-0 object-contain" />
-				<div>
-					<p class="text-[20px] uppercase">Financiación</p>
+				{/* Cambiado a flex-row con gap-2 en móvil, vuelve a flex-col en escritorio */}
+				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
+					<p class="text-[20px] uppercase ">Financiación:</p>
 					<p class="text-[20px]">Pago a los 30 días</p>
 				</div>
 			</div>
@@ -46,13 +48,13 @@ const social = [
 			{/* Aprobación */}
 			<div class="flex items-start gap-3">
 				<Image src={ter} alt="Aprobación y envíos" class="h-[22px] w-[32px] mt-0.5 flex-shrink-0 object-contain" />
-				<div>
-					<p class="text-[20px] uppercase">Aprobación y envíos</p>
+				{/* Cambiado a flex-row con gap-2 en móvil, vuelve a flex-col en escritorio */}
+				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
+					<p class="text-[20px] uppercase ">Aprobación y envíos:</p>
 					<p class="text-[20px]">Entre 24 a 48 hs</p>
 				</div>
 			</div>
 		</div>
-
 		{/* Bloque 3: Requisitos */}
 		<div>
 			<p class="text-[20px] uppercase border-b border-transparent pb-1">
