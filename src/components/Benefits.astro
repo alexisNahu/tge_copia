@@ -4,46 +4,74 @@ import footerImage from '../assets/footer.png';
 import mano_regalo from '../assets/mano_regalo.png';
 import moneda from '../assets/moneda.png';
 import corazon from '../assets/corazon.png';
-
-const benefits = [
-	{
-		text: 'Comprá al contado con excelentes precios',
-		image: mano_regalo,
-	},
-	{
-		text: 'Llevá lo que necesitás en cómodas cuotas',
-		image: moneda,
-	},
-	{
-		text: 'Atención rápida, segura y personalizada',
-		image: corazon,
-	},
-];
 ---
 
 {/* h-auto y padding para móviles; altura fija de 489px y centrado flex para desktop */}
 <section class="relative overflow-hidden py-16 h-auto md:h-[489px] flex items-center">
 	<Image src={footerImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
-	<div
-		class="absolute inset-0 bg-brand-pink/20">
-	>
-	</div>
+	<div class="absolute inset-0 bg-brand-pink/20"></div>
 
 	{/* Ajustamos el ancho completo para que el grid se alinee bien al estar dentro de un flex */}
 	<div class="relative z-10 mx-auto grid w-full grid-cols-1 gap-12 px-6 text-center sm:grid-cols-3 max-w-[1600px]">
-		{
-			benefits.map((benefit) => (
-				<div class="flex flex-col items-center gap-6">
-					<Image
-						src={benefit.image}
-						alt=""
-						class="h-[66px] w-auto object-contain"
-					/>
-					<p class="text-white text-[24px] font-bold max-w-[350px] mx-auto leading-snug">
-						{benefit.text}
-					</p>
-				</div>
-			))
-		}
+
+		{/* Beneficio 1: Regalo / Contado */}
+		<div class="benefit-item flex flex-col items-center gap-6 transition-all duration-500">
+			<Image
+				src={mano_regalo}
+				alt=""
+				class="h-[66px] w-auto object-contain transition-transform duration-300 hover:scale-110"
+			/>
+			<p class="text-white text-[24px] font-bold max-w-[350px] mx-auto leading-snug">
+				Comprá al contado con excelentes precios
+			</p>
+		</div>
+
+		{/* Beneficio 2: Moneda / Cuotas */}
+		<div class="benefit-item flex flex-col items-center gap-6 transition-all duration-500" style="transition-delay: 120ms">
+			<Image
+				src={moneda}
+				alt=""
+				class="h-[58px] w-auto object-contain transition-transform duration-300 hover:scale-110"
+			/>
+			<p class="text-white text-[24px] font-bold max-w-[350px] mx-auto leading-snug">
+				Llevá lo que necesitás en cómodas cuotas
+			</p>
+		</div>
+
+		{/* Beneficio 3: Corazón / Atención */}
+		<div class="benefit-item flex flex-col items-center gap-6 transition-all duration-500" style="transition-delay: 240ms">
+			<Image
+				src={corazon}
+				alt=""
+				class="h-[43px] w-auto object-contain transition-transform duration-300 hover:scale-110"
+			/>
+			<p class="text-white text-[24px] font-bold max-w-[350px] mx-auto leading-snug">
+				Atención rápida, segura y personalizada
+			</p>
+		</div>
+
 	</div>
 </section>
+
+<script>
+	if ('IntersectionObserver' in window) {
+		const items = document.querySelectorAll<HTMLElement>('.benefit-item');
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.remove('opacity-0', 'translate-y-6');
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.2 },
+		);
+
+		items.forEach((item) => {
+			item.classList.add('opacity-0', 'translate-y-6');
+			observer.observe(item);
+		});
+	}
+</script>

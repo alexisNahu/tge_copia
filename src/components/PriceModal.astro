@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import whatsapp from '../assets/ic_baseline-whatsapp.png';
+---
+
+<div
+	id="price-modal"
+	class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/75 px-4 opacity-0 transition-opacity duration-300"
+	role="dialog"
+	aria-modal="true"
+	aria-labelledby="price-modal-title"
+>
+	{/* Se cambió 'max-w-lg' por 'max-w-full md:max-w-[1000px]' */}
+	<div
+		id="price-modal-panel"
+		class="relative w-full max-w-full md:max-w-[904px] rounded-3xl bg-white py-10 text-center shadow-2xl sm:py-12 scale-95 opacity-0 transition-all duration-300 ease-out"
+	>
+		<button
+			id="price-modal-close"
+			type="button"
+			aria-label="Cerrar"
+			class="absolute top-5 right-6 text-3xl leading-none text-gray-400 transition-all duration-200 hover:rotate-90 hover:text-gray-600"
+		>
+			&times;
+		</button>
+
+		<h3 id="price-modal-title" class="text-2xl font-bold sm:text-[40px]"></h3>
+
+		<img id="price-modal-image" src="" alt="" class="mx-auto my-8 h-44 w-auto object-contain" />
+
+		<p class="text-[24px] uppercase">Contado</p>
+		<p id="price-modal-contado" class="mt-1 text-[36px]"></p>
+
+		<p class="mt-8 text-[24px] uppercase">Financiado</p>
+
+		{/* Opcional: Aumenté el max-w-md a max-w-2xl para que el grid de cuotas aproveche mejor el espacio ancho si es necesario */}
+		<div id="price-modal-financiado" class="mx-auto mt-3 grid max-w-2xl grid-cols-4 gap-2 text-center">
+		</div>
+
+		<a
+			id="price-modal-whatsapp"
+			href="#"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mt-10 inline-flex items-center justify-center gap-2 rounded-full bg-brand-teal px-8 py-3 text-[24px] text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95"
+		>
+			<Image src={whatsapp} alt="" class="h-[24px] w-[24px] brightness-0 invert" />
+			Hacer pedido
+		</a>
+	</div>
+</div>
+
+<script>
+	const modal = document.getElementById('price-modal');
+	const panel = document.getElementById('price-modal-panel');
+	const titleEl = document.getElementById('price-modal-title');
+	const imageEl = document.getElementById('price-modal-image') as HTMLImageElement | null;
+	const contadoEl = document.getElementById('price-modal-contado');
+	const financiadoEl = document.getElementById('price-modal-financiado');
+	const whatsappEl = document.getElementById('price-modal-whatsapp') as HTMLAnchorElement | null;
+
+	function openModal(card: HTMLElement) {
+		if (!modal) return;
+		const { name, image, contado, financiado, whatsapp: whatsappHref } = card.dataset;
+
+		if (titleEl) titleEl.textContent = name ?? '';
+		if (imageEl) {
+			imageEl.src = image ?? '';
+			imageEl.alt = name ?? '';
+		}
+		if (contadoEl) contadoEl.textContent = `Gs. ${contado ?? ''}`;
+		if (whatsappEl && whatsappHref) whatsappEl.href = whatsappHref;
+
+		if (financiadoEl && financiado) {
+			const cuotas = JSON.parse(financiado) as { cuotas: number; monto: string }[];
+			financiadoEl.innerHTML = cuotas
+				.map(
+					(c) =>
+						`<div><span class="block font-bold">${c.cuotas}x</span>Gs. ${c.monto}</div>`,
+				)
+				.join('');
+		}
+
+		modal.classList.remove('hidden');
+		modal.classList.add('flex');
+		document.body.classList.add('overflow-hidden');
+
+		// force a reflow so the opacity/scale transition actually plays
+		void modal.offsetWidth;
+		modal.classList.remove('opacity-0');
+		panel?.classList.remove('opacity-0', 'scale-95');
+	}
+
+	function closeModal() {
+		if (!modal) return;
+		modal.classList.add('opacity-0');
+		panel?.classList.add('opacity-0', 'scale-95');
+		document.body.classList.remove('overflow-hidden');
+
+		window.setTimeout(() => {
+			modal.classList.add('hidden');
+			modal.classList.remove('flex');
+		}, 300);
+	}
+
+	document.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+
+		const trigger = target.closest<HTMLElement>('.price-toggle');
+		if (trigger) {
+			const card = trigger.closest<HTMLElement>('.product-card');
+			if (card) openModal(card);
+			return;
+		}
+
+		if (target.id === 'price-modal-close' || target === modal) closeModal();
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') closeModal();
+	});
+</script>

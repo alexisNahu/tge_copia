@@ -1,6 +1,7 @@
 ---
 import CategoryFilter from './CategoryFilter.astro';
 import ProductCard from './ProductCard.astro';
+import PriceModal from './PriceModal.astro';
 import { products } from '../data/products';
 ---
 
@@ -11,16 +12,28 @@ import { products } from '../data/products';
 	</div>
 </section>
 
+<PriceModal />
+
 <script>
-	document.addEventListener('click', (event) => {
-		const button = (event.target as HTMLElement).closest<HTMLButtonElement>('.price-toggle');
-		if (!button) return;
+	if ('IntersectionObserver' in window) {
+		const cards = document.querySelectorAll<HTMLElement>('.product-card');
 
-		const panel = button.closest('.product-card')?.querySelector('.price-panel');
-		if (!panel) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.remove('opacity-0', 'translate-y-6');
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.15 },
+		);
 
-		const expanded = button.getAttribute('aria-expanded') === 'true';
-		button.setAttribute('aria-expanded', String(!expanded));
-		panel.classList.toggle('hidden', expanded);
-	});
+		cards.forEach((card, index) => {
+			card.classList.add('opacity-0', 'translate-y-6');
+			card.style.transitionDelay = `${(index % 3) * 80}ms`;
+			observer.observe(card);
+		});
+	}
 </script>

@@ -15,12 +15,17 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 ---
 
 <article
-	class="product-card relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-sm w-[465px] h-[522px]"
+	class="product-card group relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-sm w-[465px] h-[522px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
 	data-category={product.category}
+	data-name={product.name}
+	data-image={product.image.src}
+	data-contado={product.contado}
+	data-financiado={JSON.stringify(product.financiado)}
+	data-whatsapp={whatsappHref}
 >
 	{
 		product.badge && (
-			<span class="absolute top-2 right-2 rounded bg-red-600 px-1.5 py-1 text-[9px] leading-none font-bold text-white z-10">
+			<span class="absolute top-2 right-2 rounded bg-red-600 px-1.5 py-1 text-[9px] leading-none font-bold text-white z-10 animate-pulse">
              {product.badge}
           </span>
 		)
@@ -32,7 +37,7 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 			src={product.image}
 			alt={product.name}
 			loading="lazy"
-			class="w-full h-full object-contain"
+			class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
 		/>
 	</div>
 
@@ -45,8 +50,8 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 	<div class="mt-auto flex justify-center gap-2">
 		<button
 			type="button"
-			class="price-toggle rounded-full bg-gradient-to-r from-brand-pink to-brand-purple px-6 py-1.5 text-[14px] text-white uppercase cursor-pointer"
-			aria-expanded="false"
+			class="price-toggle rounded-full bg-gradient-to-r from-brand-pink to-brand-purple px-6 py-1.5 text-[14px] text-white uppercase cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
+			aria-haspopup="dialog"
 		>
 			Ver precios
 		</button>
@@ -54,27 +59,10 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 			href={whatsappHref}
 			target="_blank"
 			rel="noopener noreferrer"
-			class="inline-flex items-center gap-1 rounded-full bg-brand-teal px-3 py-1.5 text-[14px] text-white uppercase hover:bg-brand-teal-dark"
+			class="inline-flex items-center gap-1 rounded-full bg-brand-teal px-3 py-1.5 text-[14px] text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95"
 		>
 			<Image src={whatsapp} alt="" class="h-[14px] w-[14px] brightness-0 invert" />
 			Hacer pedido
 		</a>
-	</div>
-
-	{/* Panel de precios oculto */}
-	<div class="price-panel mt-4 hidden border-t border-gray-100 pt-3 text-center">
-		<p class="text-[10px] font-semibold tracking-wide text-gray-400 uppercase">Contado</p>
-		<p class="text-lg font-bold text-gray-900">Gs. {product.contado}</p>
-		<p class="mt-2 text-[10px] font-semibold tracking-wide text-gray-400 uppercase">Financiado</p>
-		<div class="mt-1 grid grid-cols-4 gap-1 text-[10px] text-gray-700">
-			{
-				product.financiado.map((cuota) => (
-					<div>
-						<span class="block font-semibold">{cuota.cuotas}x</span>
-						Gs. {cuota.monto}
-					</div>
-				))
-			}
-		</div>
 	</div>
 </article>
