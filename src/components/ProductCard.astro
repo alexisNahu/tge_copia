@@ -15,7 +15,7 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 ---
 
 <article
-	class="product-card group relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-sm w-full max-w-[465px] h-[522px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+	class="product-card group relative flex flex-col justify-between rounded-lg bg-white p-6 shadow-sm w-full max-w-[465px] max-h-[522px] f-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
 	data-category={product.category}
 	data-name={product.name}
 	data-image={product.image.src}
@@ -40,7 +40,7 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 		/>
 	</div>
 
-	<h3 class="text-center text-[32px] font-bold md:h-[96px] h-[140px] flex max-w-[370px] w-full mx-auto items-center justify-center line-clamp-2 overflow-hidden mt-2 leading-tight">
+	<h3 class="text-center text-[32px] font-bold md:h-[96px] h-[140px] flex max-w-[370px] w-full mx-auto items-center justify-end line-clamp-2 overflow-hidden mt-2 leading-tight">
 		{product.name}
 	</h3>
 
