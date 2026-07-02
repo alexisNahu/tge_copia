@@ -12,28 +12,28 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 >
 	<div
 		id="price-modal-panel"
-		class="relative w-full max-w-full md:max-w-[904px] max-h-[80vh] overflow-y-auto rounded-3xl bg-white py-10 text-center shadow-2xl sm:py-12 scale-95 opacity-0 transition-all duration-300 ease-out"
+		class="relative w-full max-w-full md:max-w-[904px] max-h-[95dvh] sm:max-h-[80vh] overflow-y-auto rounded-3xl bg-white py-6 text-center shadow-2xl sm:py-12 scale-95 opacity-0 transition-all duration-300 ease-out"
 	>
 		<button
 			id="price-modal-close"
 			type="button"
 			aria-label="Cerrar"
-			class="absolute top-5 right-6 text-3xl leading-none text-gray-400 transition-all duration-200 hover:rotate-90 hover:text-gray-600"
+			class="absolute top-3 right-4 sm:top-5 sm:right-6 text-2xl sm:text-3xl leading-none text-gray-400 transition-all duration-200 hover:rotate-90 hover:text-gray-600"
 		>
 			&times;
 		</button>
 
-		<h3 id="price-modal-title" class="text-2xl font-bold sm:text-[40px]"></h3>
+		<h3 id="price-modal-title" class="px-8 text-xl font-bold sm:px-0 sm:text-[40px]"></h3>
 
-		<img id="price-modal-image" src="" alt="" class="mx-auto my-8 h-44 w-auto object-contain" />
+		<img id="price-modal-image" src="" alt="" class="mx-auto my-3 h-24 w-auto object-contain sm:my-8 sm:h-44" />
 
-		<p class="text-[24px] uppercase">Contado</p>
-		<p id="price-modal-contado" class="mt-1 text-[36px]"></p>
+		<p class="text-sm uppercase sm:text-[24px]">Contado</p>
+		<p id="price-modal-contado" class="mt-1 text-xl sm:text-[36px]"></p>
 
-		<p class="mt-8 text-[24px] uppercase">Financiado</p>
+		<p class="mt-3 text-sm uppercase sm:mt-8 sm:text-[24px]">Financiado</p>
 
 		{/* Opcional: Aumenté el max-w-md a max-w-2xl para que el grid de cuotas aproveche mejor el espacio ancho si es necesario */}
-		<div id="price-modal-financiado" class="mx-auto mt-3 grid max-w-2xl grid-cols-4 gap-2 text-center">
+		<div id="price-modal-financiado" class="mx-auto mt-2 grid max-w-2xl grid-cols-4 gap-2 text-center text-xs sm:mt-3 sm:text-base">
 		</div>
 
 		<a
@@ -41,9 +41,9 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 			href="#"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="mt-10 inline-flex items-center justify-center gap-2 rounded-full bg-brand-teal px-8 py-3 text-[24px] text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95"
+			class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-brand-teal px-6 py-2 text-sm text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95 sm:mt-10 sm:px-8 sm:py-3 sm:text-[24px]"
 		>
-			<Image src={whatsapp} alt="" class="h-[24px] w-[24px] brightness-0 invert" />
+			<Image src={whatsapp} alt="" class="h-4 w-4 brightness-0 invert sm:h-[24px] sm:w-[24px]" />
 			Hacer pedido
 		</a>
 	</div>

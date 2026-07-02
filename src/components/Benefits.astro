@@ -6,8 +6,8 @@ import moneda from '../assets/moneda.png';
 import corazon from '../assets/corazon.png';
 ---
 
-{/* h-auto y padding para móviles; altura fija de 489px y centrado flex para desktop */}
-<section class="relative overflow-hidden py-16 h-auto md:h-[489px] flex items-center">
+{/* 100dvh en móvil para que ocupe la pantalla completa; altura fija de 489px y centrado flex para desktop */}
+<section class="relative overflow-hidden py-16 h-[100dvh] md:h-[489px] flex items-center">
 	<Image src={footerImage} alt="" class="absolute inset-0 h-full w-full object-cover" />
 	<div class="absolute inset-0 bg-brand-pink/20"></div>
 
