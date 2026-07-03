@@ -3,10 +3,11 @@ import { Image } from 'astro:assets';
 import banner from '../assets/banner.png';
 ---
 <section id="top" class="relative h-screen min-h-[560px] overflow-hidden w-full">
+	{/* MODIFICADO: Añadido 'object-cover' por defecto para móviles y mantenido el 'md:object-center' */}
 	<Image
 		src={banner}
 		alt="Living room with a smart TV on a wooden stand"
-		class="absolute inset-0 h-full w-full object-center animate-[ken-burns_20s_ease-in-out_infinite_alternate]"
+		class="absolute inset-0 h-full w-full object-cover md:object-center animate-[ken-burns_20s_ease-in-out_infinite_alternate]"
 		fetchpriority="high"
 	/>
 

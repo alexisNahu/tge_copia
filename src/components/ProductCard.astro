@@ -1,7 +1,7 @@
 ---
 import whatsapp from '../assets/ic_baseline-whatsapp.png';
 import type { Product } from '../data/products';
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 
 interface Props {
 	product: Product;
@@ -14,8 +14,9 @@ const message = `Hola, quiero hacer un pedido de ${product.name}`;
 const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 ---
 
+{/* MODIFICADO: Cambiado f-full por h-full corregido, y eliminado el max-h-[522px] estricto en móvil (se aplica md:max-h-[522px]) */}
 <article
-	class="product-card group relative flex flex-col justify-between rounded-lg bg-white pb-6 shadow-sm w-full max-w-[465px] max-h-[522px] f-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+	class="product-card group relative flex flex-col justify-between rounded-lg bg-white pb-6 shadow-sm w-full max-w-[465px] md:max-h-[522px] h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
 	data-category={product.category}
 	data-name={product.name}
 	data-image={product.image.src}
@@ -31,7 +32,8 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 		)
 	}
 
-	<div class="w-full h-[800px] flex items-center justify-center overflow-hidden">
+	{/* MODIFICADO: Cambiado h-[800px] (que rompía todo) por un aspecto controlado aspect-square o h-[250px] en móvil, y md:h-[280px] en PC */}
+	<div class="w-full h-[250px] md:h-[280px] flex items-center justify-center overflow-hidden p-4">
 		<Image
 			src={product.image}
 			alt={product.name}
@@ -40,11 +42,12 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 		/>
 	</div>
 
-	<h3 class="text-center text-[32px] font-bold md:h-[200px] h-[140px] flex max-w-[370px] w-full mx-auto items-center justify-center line-clamp-2 overflow-hidden my-6">
+	{/* MODIFICADO: Cambiado md:h-[200px] h-auto. Eliminado line-clamp drástico en móvil y ajustado el tamaño de texto text-[24px] md:text-[32px] */}
+	<h3 class="text-center text-[24px] md:text-[32px] font-bold md:h-[100px] h-auto flex max-w-[370px] w-full mx-auto items-center justify-center overflow-hidden my-4 px-4">
 		{product.name}
 	</h3>
 
-	<div class="mt-auto flex justify-center gap-2">
+	<div class="mt-auto flex justify-center gap-2 px-4">
 		<button
 			type="button"
 			class="price-toggle rounded-full bg-gradient-to-r from-brand-pink to-brand-purple px-6 py-1.5 text-[14px] text-white uppercase cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
