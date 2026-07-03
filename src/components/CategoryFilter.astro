@@ -11,7 +11,7 @@ import { categories } from '../data/products';
 			<button
 				type="button"
 				data-category={category}
-				class="category-btn flex h-[47px] w-[175px] shrink-0 snap-start items-center justify-center rounded-full border border-gray-200 bg-white text-[20px] uppercase shadow-sm transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
+				class="category-btn flex h-[47px] w-[175px] shrink-0 snap-start items-center justify-center rounded-full bg-white text-[20px] uppercase transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
 				aria-pressed="false"
 			>
 				{category}
@@ -24,22 +24,22 @@ import { categories } from '../data/products';
 	const buttons = document.querySelectorAll<HTMLButtonElement>('.category-btn');
 	const cards = document.querySelectorAll<HTMLElement>('.product-card');
 
+	function applyFilter() {
+		const activeCategories = Array.from(buttons)
+			.filter((b) => b.getAttribute('aria-pressed') === 'true')
+			.map((b) => b.dataset.category);
+
+		cards.forEach((card) => {
+			const matches = activeCategories.length === 0 || activeCategories.includes(card.dataset.category);
+			card.classList.toggle('hidden', !matches);
+		});
+	}
+
 	buttons.forEach((button) => {
 		button.addEventListener('click', () => {
 			const alreadyActive = button.getAttribute('aria-pressed') === 'true';
-
-			buttons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
-
-			if (alreadyActive) {
-				cards.forEach((card) => card.classList.remove('hidden'));
-				return;
-			}
-
-			button.setAttribute('aria-pressed', 'true');
-			const category = button.dataset.category;
-			cards.forEach((card) => {
-				card.classList.toggle('hidden', card.dataset.category !== category);
-			});
+			button.setAttribute('aria-pressed', alreadyActive ? 'false' : 'true');
+			applyFilter();
 		});
 	});
 </script>
