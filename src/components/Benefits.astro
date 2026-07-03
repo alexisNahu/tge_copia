@@ -16,14 +16,16 @@ import corazon from '../assets/corazon.png';
 		{/* Beneficio 1: Regalo / Contado */}
 		{/* MODIFICADO: justify-start para alinear el contenido a la izquierda de su columna */}
 		<div class="benefit-item flex flex-col items-center justify-start gap-6 transition-all duration-500">
-			<Image
-				src={mano_regalo}
-				alt=""
-				class="h-[66px] w-auto object-contain transition-transform duration-300 hover:scale-110"
-			/>
-			<p class="text-white text-[24px] font-bold max-w-[350px]">
-				Comprá al contado con excelentes precios
-			</p>
+			<div class="absolute left-0">
+				<Image
+					src={mano_regalo}
+					alt=""
+					class="h-[66px] w-auto mx-auto object-contain transition-transform duration-300 hover:scale-110"
+				/>
+				<p class="text-white text-[24px] font-bold max-w-[350px]">
+					Comprá al contado con excelentes precios
+				</p>
+			</div>
 		</div>
 
 		{/* Beneficio 2: Moneda / Cuotas */}
@@ -42,14 +44,17 @@ import corazon from '../assets/corazon.png';
 		{/* Beneficio 3: Corazón / Atención */}
 		{/* MODIFICADO: justify-end para alinear el contenido a la derecha de su columna */}
 		<div class="benefit-item flex flex-col items-center justify-end gap-6 transition-all duration-500" style="transition-delay: 240ms">
-			<Image
-				src={corazon}
-				alt=""
-				class="h-[43px] w-auto object-contain transition-transform duration-300 hover:scale-110"
-			/>
-			<p class="text-white text-[24px] font-bold max-w-[350px]">
-				Atención rápida, segura y personalizada
-			</p>
+			<div class="absolute right-0">
+				<Image
+					src={corazon}
+					alt=""
+					class="h-[43px] w-auto mx-auto object-contain transition-transform duration-300 hover:scale-110"
+				/>
+				<p class="text-white text-[24px] font-bold max-w-[350px]">
+					Atención rápida, segura y personalizada
+				</p>
+			</div>
+
 		</div>
 
 	</div>
