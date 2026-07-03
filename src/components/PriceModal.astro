@@ -33,7 +33,7 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 		<p class="mt-3 text-sm uppercase sm:mt-8 sm:text-[24px]">Financiado</p>
 
 		{/* Opcional: Aumenté el max-w-md a max-w-2xl para que el grid de cuotas aproveche mejor el espacio ancho si es necesario */}
-		<div id="price-modal-financiado" class="mx-auto mt-2 grid max-w-2xl grid-cols-4 gap-2 text-center text-xs sm:mt-3 sm:text-base">
+		<div id="price-modal-financiado" class="mx-auto mt-2 grid max-w-2xl gap-2 text-center text-xs sm:mt-3 sm:text-base">
 		</div>
 
 		<a
@@ -72,6 +72,7 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 
 		if (financiadoEl && financiado) {
 			const cuotas = JSON.parse(financiado) as { cuotas: number; monto: string }[];
+			financiadoEl.style.gridTemplateColumns = `repeat(${cuotas.length}, minmax(0, 1fr))`;
 			financiadoEl.innerHTML = cuotas
 				.map(
 					(c) =>
