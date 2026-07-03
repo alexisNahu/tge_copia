@@ -14,11 +14,11 @@ const social = [
 ];
 ---
 
-{/* Cambiado el padding para pantallas grandes para que se alinee con tu rejilla de Figma (px-6 md:px-12) */}
-<footer class="flex min-h-[100dvh] flex-col justify-center items-center px-6 md:px-12 py-12 bg-white w-full">
+{/* El footer ahora es un contenedor de ancho completo que solo maneja el fondo y un padding interno */}
+<footer class="w-full bg-white px-6 sm:px-0 py-12 md:py-16 flex items-center md:h-[50dvh] justify-center max-w-[1700px] mx-auto">
 
-	{/* MODIFICADO: Asegurado w-full y mx-auto junto al max-w-[1700px] */}
-	<div class="flex flex-col items-center justify-between gap-12 sm:flex-row sm:items-start w-full max-w-[1700px] mx-auto">
+	{/* MODIFICADO: Este div es el que ahora clava los 1700px máximos y se centra perfectamente con mx-auto */}
+	<div class="flex flex-col items-center justify-around w-full gap-12 sm:flex-row sm:items-start ">
 
 		{/* Bloque 1: Logo */}
 		<div class="flex flex-shrink-0 items-center justify-center">
@@ -26,13 +26,12 @@ const social = [
 		</div>
 
 		{/* Bloque 2: Información de Contacto, Financiación, Envíos */}
-		{/* MODIFICADO: Eliminado md:ml-24 para que flex layout distribuya el espacio simétricamente de punta a punta */}
 		<div class="flex flex-col gap-6 text-[#3A1D28] justify-center">
 			{/* Contacto */}
 			<div class="flex items-center gap-3">
 				<Image src={whatsapp} alt="Whatsapp" class="h-[28px] w-[28px] flex-shrink-0" />
 				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
-					<p class="text-[20px] uppercase font-bold sm:font-normal">Contacto:</p>
+					<p class="text-[20px] uppercase">Contacto:</p>
 					<p class="text-[20px]">0974 283765</p>
 				</div>
 			</div>
@@ -41,7 +40,7 @@ const social = [
 			<div class="flex items-center gap-3">
 				<Image src={seg} alt="Financiación" class="h-[24px] w-[27px] flex-shrink-0 object-contain" />
 				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
-					<p class="text-[20px] uppercase font-bold sm:font-normal">Financiación:</p>
+					<p class="text-[20px] uppercase">Financiación:</p>
 					<p class="text-[20px]">Pago a los 30 días</p>
 				</div>
 			</div>
@@ -50,7 +49,7 @@ const social = [
 			<div class="flex items-center gap-3">
 				<Image src={ter} alt="Aprobación y envíos" class="h-[22px] w-[32px] flex-shrink-0 object-contain" />
 				<div class="flex flex-row flex-wrap items-baseline gap-2 sm:flex-col sm:gap-0">
-					<p class="text-[20px] uppercase font-bold sm:font-normal">Aprobación y envíos:</p>
+					<p class="text-[20px] uppercase">Aprobación y envíos:</p>
 					<p class="text-[20px]">Entre 24 a 48 hs</p>
 				</div>
 			</div>
@@ -58,7 +57,7 @@ const social = [
 
 		{/* Bloque 3: Requisitos */}
 		<div class="flex flex-col justify-center">
-			<p class="text-[20px] uppercase border-b border-transparent pb-1 font-bold sm:font-normal mb-2 sm:mb-0">
+			<p class="text-[20px] uppercase border-b border-transparent pb-1 mb-2 sm:mb-0">
 				Requisitos para acceder a créditos o cuotas
 			</p>
 			<ul class="flex flex-col gap-2">
@@ -74,7 +73,6 @@ const social = [
 		</div>
 
 		{/* Bloque 4: Redes Sociales */}
-		{/* MODIFICADO: Cambiado sm:ml-auto por un comportamiento neutro para encajar en los extremos de las columnas */}
 		<div class="flex items-center gap-4 sm:mt-0">
 			{
 				social.map((item) => (
