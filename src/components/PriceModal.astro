@@ -10,7 +10,6 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 	aria-modal="true"
 	aria-labelledby="price-modal-title"
 >
-	{/* MODIFICADO: Se removieron py-6 y sm:py-0; añadidos pt-6 pb-6 md:pt-[77px] md:pb-[73px] */}
 	<div
 		id="price-modal-panel"
 		class="relative w-full h-auto md:w-[904px] md:h-[100dvh] max-h-[100dvh] overflow-y-auto rounded-3xl bg-white pt-6 pb-6 md:pt-[77px] md:pb-[73px] text-center shadow-2xl scale-95 opacity-0 transition-all duration-300 ease-out flex flex-col justify-center"
@@ -44,7 +43,7 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 			href="#"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-brand-teal py-[8px] px-[31px] text-sm text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95 sm:mt-10 sm:text-[24px] self-center"
+			class="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#1bd3a8] py-[8px] px-[31px] text-sm text-white uppercase transition-transform duration-200 hover:scale-105 hover:bg-brand-teal-dark active:scale-95 sm:mt-10 sm:text-[24px] self-center"
 		>
 			<Image src={whatsapp} alt="" class="h-4 w-4 brightness-0 invert sm:h-[24px] sm:w-[24px]" />
 			Hacer pedido
@@ -75,7 +74,18 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 
 		if (financiadoEl && financiado) {
 			const cuotas = JSON.parse(financiado) as { cuotas: number; monto: string }[];
-			financiadoEl.style.gridTemplateColumns = `repeat(${cuotas.length}, minmax(0, 1fr))`;
+
+			{/* MODIFICADO: Comprobamos si es pantalla móvil (menor a 640px / breakpoint 'sm' de Tailwind) */}
+			const isMobile = window.matchMedia('(max-width: 639px)').matches;
+
+			if (cuotas.length === 4 && isMobile) {
+				{/* En móviles con 4 elementos forzamos la rejilla de 2x2 */}
+				financiadoEl.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+			} else {
+				{/* En PC (o cualquier otra cantidad) se mantiene en una sola fila estricta */}
+				financiadoEl.style.gridTemplateColumns = `repeat(${cuotas.length}, minmax(0, 1fr))`;
+			}
+
 			financiadoEl.innerHTML = cuotas
 				.map(
 					(c) =>
