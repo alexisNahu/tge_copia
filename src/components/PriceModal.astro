@@ -10,9 +10,10 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 	aria-modal="true"
 	aria-labelledby="price-modal-title"
 >
+	{/* MODIFICADO: Se cambió 'justify-start' por 'justify-between md:justify-start' */}
 	<div
 		id="price-modal-panel"
-		class="relative w-full h-auto md:w-[904px] md:h-[100dvh] max-h-[100dvh] rounded-3xl bg-white pt-6 pb-6 md:pt-[77px] md:pb-[73px] text-center shadow-2xl scale-95 opacity-0 transition-all duration-300 ease-out flex flex-col justify-start"
+		class="relative w-full h-auto md:w-[904px] md:h-[100dvh] max-h-[100dvh] rounded-3xl bg-white pt-6 pb-6 md:pt-[77px] md:pb-[73px] text-center shadow-2xl scale-95 opacity-0 transition-all duration-300 ease-out flex flex-col justify-between md:justify-start"
 	>
 		<button
 			id="price-modal-close"
@@ -34,7 +35,7 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 
 		<div
 			id="price-modal-financiado"
-			class="mx-auto mt-2 grid w-max max-w-full gap-x-6 gap-y-2 text-left text-[15px] sm:mt-3 sm:gap-x-[55px] sm:text-[24px]"
+			class="mx-auto mt-2 grid w-full max-w-full justify-between gap-x-6 gap-y-2 text-left text-[15px] sm:mt-3 sm:w-max sm:justify-normal sm:gap-x-[55px] sm:text-[24px]"
 		>
 		</div>
 
@@ -75,14 +76,11 @@ import whatsapp from '../assets/ic_baseline-whatsapp.png';
 		if (financiadoEl && financiado) {
 			const cuotas = JSON.parse(financiado) as { cuotas: number; monto: string }[];
 
-			{/* MODIFICADO: Comprobamos si es pantalla móvil (menor a 640px / breakpoint 'sm' de Tailwind) */}
 			const isMobile = window.matchMedia('(max-width: 639px)').matches;
 
 			if (cuotas.length === 4 && isMobile) {
-				{/* En móviles con 4 elementos forzamos la rejilla de 2x2 */}
 				financiadoEl.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
 			} else {
-				{/* En PC (o cualquier otra cantidad) se mantiene en una sola fila estricta */}
 				financiadoEl.style.gridTemplateColumns = `repeat(${cuotas.length}, minmax(0, 1fr))`;
 			}
 
