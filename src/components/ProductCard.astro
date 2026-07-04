@@ -14,9 +14,8 @@ const message = `Hola, quiero hacer un pedido de ${product.name}`;
 const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 ---
 
-{/* MODIFICADO: Cambiado f-full por h-full corregido, y eliminado el max-h-[522px] estricto en móvil (se aplica md:max-h-[522px]) */}
 <article
-	class="product-card group relative flex flex-col justify-between rounded-lg bg-white pb-6 shadow-sm w-full max-w-[465px] md:max-h-[522px] h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+	class="product-card group relative flex flex-col justify-between rounded-lg bg-white pb-6 shadow-sm w-full md:w-[465px] md:h-[522px] h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
 	data-category={product.category}
 	data-name={product.name}
 	data-image={product.image.src}
@@ -32,18 +31,19 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 		)
 	}
 
-	{/* MODIFICADO: Cambiado h-[800px] (que rompía todo) por un aspecto controlado aspect-square o h-[250px] en móvil, y md:h-[280px] en PC */}
-	<div class="w-full h-[250px] md:h-[280px] flex items-center justify-center overflow-hidden p-4">
+	{/* MODIFICADO: El contenedor ahora tiene una altura fija para que todas las tarjetas mantengan la simetría visual en el grid */}
+	<div class="w-full h-[270px] md:h-[350px] flex items-center justify-center p-4">
+		{/* MODIFICADO: Eliminados 'w-full h-full' y reemplazados por 'w-auto h-auto max-h-full max-w-full' */}
+		{/* Esto hace que la imagen use su tamaño real original, pero sin desbordar el contenedor protector */}
 		<Image
 			src={product.image}
 			alt={product.name}
 			loading="lazy"
-			class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+			class="w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
 		/>
 	</div>
 
-	{/* MODIFICADO: Cambiado md:h-[200px] h-auto. Eliminado line-clamp drástico en móvil y ajustado el tamaño de texto text-[24px] md:text-[32px] */}
-	<h3 class="text-center text-[24px] md:text-[32px] font-bold md:h-[100px] h-auto flex max-w-[370px] w-full mx-auto items-center justify-center overflow-hidden my-4 px-4">
+	<h3 class="text-center text-[24px] md:text-[32px] font-bold md:h-[88px] h-auto flex max-w-[310px] w-full mx-auto items-center justify-center overflow-hidden">
 		{product.name}
 	</h3>
 

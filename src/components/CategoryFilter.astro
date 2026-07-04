@@ -7,14 +7,14 @@ import { categories } from '../data/products';
 
 		<nav
 			aria-label="Categorías de productos"
-			class="no-scrollbar flex snap-x snap-proximity flex-nowrap justify-start lg:justify-center gap-6 mt-32 overflow-x-auto py-6 w-full"
+			class="no-scrollbar flex snap-x snap-proximity flex-nowrap justify-start lg:justify-center gap-6 mt-[123px] overflow-x-auto py-6 w-full"
 		>
 		{
 			categories.map((category) => (
 				<button
 					type="button"
 					data-category={category}
-					class="category-btn flex h-[47px] w-[175px] shrink-0 snap-start items-center justify-center rounded-full bg-white text-[20px] uppercase transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
+					class="category-btn flex h-auto w-auto px-[26px] py-[10px] shrink-0 snap-start items-center justify-center rounded-full bg-white text-[20px] uppercase transition-all duration-200 hover:scale-105 hover:border-brand-purple hover:text-brand-purple active:scale-95 aria-pressed:border-brand-purple aria-pressed:bg-brand-purple aria-pressed:text-white"
 					aria-pressed="false"
 				>
 					{category}

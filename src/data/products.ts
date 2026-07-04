@@ -191,7 +191,6 @@ export const products: Product[] = [
 		name: 'SPEAKER JBL GO BLUE',
 		category: 'Speakers',
 		image: jblGo,
-		badge: '1 AÑO DE GARANTÍA',
 		contado: '350.000',
 		financiado: [
 			{ cuotas: 3, monto: '140.000' },
