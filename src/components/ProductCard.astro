@@ -31,19 +31,19 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 		)
 	}
 
-	{/* MODIFICADO: El contenedor ahora tiene una altura fija para que todas las tarjetas mantengan la simetría visual en el grid */}
-	<div class="w-full h-[270px] md:h-[350px] flex items-center justify-center p-4">
-		{/* MODIFICADO: Eliminados 'w-full h-full' y reemplazados por 'w-auto h-auto max-h-full max-w-full' */}
-		{/* Esto hace que la imagen use su tamaño real original, pero sin desbordar el contenedor protector */}
+	{/* Contenedor de la imagen */}
+	<div class="w-full flex items-center justify-center p-4 min-h-[270px] md:min-h-[350px]">
 		<Image
 			src={product.image}
 			alt={product.name}
 			loading="lazy"
-			class="w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+			class={`w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110 ${product.imageDimensions}`}
 		/>
 	</div>
 
-	<h3 class="text-center text-[24px] md:text-[32px] font-bold md:h-[88px] h-auto flex max-w-[310px] w-full mx-auto items-center justify-center overflow-hidden">
+	{/* MODIFICADO: Cambiado h-auto por h-[64px] md:h-[88px] e introducido margen constante (my-4) */}
+	{/* Al reservar exactamente 88px en desktop, todas las cajas h3 medirán lo mismo y los botones nacerán exactamente en el mismo renglón horizontal */}
+	<h3 class={`text-center text-[24px] md:text-[32px] justify-start font-bold w-full mx-auto h-[64px] md:h-[88px] flex items-center md:mb-6 break-words my-4 px-2 leading-tight ${product.titleMaxWidth}`}>
 		{product.name}
 	</h3>
 

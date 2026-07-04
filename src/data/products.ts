@@ -6,8 +6,9 @@ import tv3 from '../assets/tv_3.png';
 import heladera from '../assets/heladera.png';
 import microondas from '../assets/microondas.png';
 import hornoElectrico from '../assets/microondas2.png';
-import partybox from '../assets/parlante.png';
-import jblCharge from '../assets/jbl2.png';
+import partybox from '../assets/sonido.png';
+import jbl2 from '../assets/jbl2.png'
+import jblCharge from '../assets/parlante.png';
 import jblFlip from '../assets/jbl3.png';
 import jblGo from '../assets/jbl4.png';
 import lavarropas from '../assets/lavarropas.png';
@@ -33,6 +34,8 @@ export interface Product {
 	badge?: string;
 	contado: string;
 	financiado: { cuotas: number; monto: string }[];
+	titleMaxWidth: string;
+	imageDimensions: string; // 👈 Nueva propiedad para las dimensiones exactas de la imagen
 }
 
 export const products: Product[] = [
@@ -47,6 +50,8 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '177.667' },
 			{ cuotas: 12, monto: '95.667' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[310px]',
+		imageDimensions: 'md:w-[416px] md:h-[312px]',
 	},
 	{
 		id: 2,
@@ -60,6 +65,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '210.000' },
 			{ cuotas: 18, monto: '150.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[320px]',
+		imageDimensions: 'md:w-[359px] md:h-[359px]',
 	},
 	{
 		id: 3,
@@ -72,6 +79,8 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '170.000' },
 			{ cuotas: 12, monto: '92.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[301px]',
+		imageDimensions: 'md:w-[330px] md:h-[330px]',
 	},
 	{
 		id: 4,
@@ -84,6 +93,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '284.000' },
 			{ cuotas: 18, monto: '203.000' },
 		],
+		titleMaxWidth: 'max-w-[320px] md:max-w-[374px]',
+		imageDimensions: 'md:w-[357px] md:h-[357px]',
 	},
 	{
 		id: 5,
@@ -96,6 +107,8 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '288.817' },
 			{ cuotas: 12, monto: '155.517' },
 		],
+		titleMaxWidth: 'max-w-[300px] md:max-w-[322px]',
+		imageDimensions: 'md:w-[401px] md:h-[301px]',
 	},
 	{
 		id: 6,
@@ -109,6 +122,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '490.000' },
 			{ cuotas: 18, monto: '350.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[301px]',
+		imageDimensions: 'md:w-[330px] md:h-[330px]',
 	},
 	{
 		id: 7,
@@ -122,6 +137,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '115.000' },
 			{ cuotas: 18, monto: '82.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[301px]',
+		imageDimensions: 'md:w-[295px] md:h-[295px]',
 	},
 	{
 		id: 8,
@@ -135,6 +152,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '231.000' },
 			{ cuotas: 18, monto: '165.000' },
 		],
+		titleMaxWidth: 'max-w-[300px] md:max-w-[322px]',
+		imageDimensions: 'md:w-[401px] md:h-[301px]',
 	},
 	{
 		id: 9,
@@ -148,6 +167,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '116.000' },
 			{ cuotas: 18, monto: '83.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[301px]',
+		imageDimensions: 'md:w-[330px] md:h-[330px]',
 	},
 	{
 		id: 10,
@@ -160,12 +181,14 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '150.500' },
 			{ cuotas: 12, monto: '82.000' },
 		],
+		titleMaxWidth: 'max-w-[320px] md:max-w-[379px]',
+		imageDimensions: 'md:w-[264px] md:h-[264px]',
 	},
 	{
 		id: 11,
 		name: 'SPEAKER JBL FLIP 7 BLACK',
 		category: 'Speakers',
-		image: jblFlip,
+		image: jbl2,
 		contado: '750.000',
 		financiado: [
 			{ cuotas: 3, monto: '308.000' },
@@ -173,6 +196,8 @@ export const products: Product[] = [
 			{ cuotas: 12, monto: '89.000' },
 			{ cuotas: 18, monto: '65.000' },
 		],
+		titleMaxWidth: 'max-w-[300px] md:max-w-[322px]',
+		imageDimensions: 'md:w-[401px] md:h-[301px]',
 	},
 	{
 		id: 12,
@@ -185,6 +210,8 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '119.000' },
 			{ cuotas: 12, monto: '70.000' },
 		],
+		titleMaxWidth: 'max-w-[280px] md:max-w-[301px]',
+		imageDimensions: 'md:w-[280px] md:h-[280px]',
 	},
 	{
 		id: 13,
@@ -197,5 +224,8 @@ export const products: Product[] = [
 			{ cuotas: 6, monto: '75.000' },
 			{ cuotas: 12, monto: '42.000' },
 		],
+		titleMaxWidth: 'max-w-[320px] md:max-w-[379px]',
+		// Como me pasaste 12 medidas para 13 productos, asumí la última igual a la anterior (264x264) o podés cambiarla aquí si varía
+		imageDimensions: 'md:w-[264px] md:h-[264px]',
 	},
 ];
