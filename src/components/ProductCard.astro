@@ -32,12 +32,12 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 	}
 
 	{/* Contenedor de la imagen */}
-	<div class="w-full flex items-center justify-center p-4 min-h-[270px] md:min-h-[336px]">
+	<div class="w-full flex items-center justify-center p-4 min-h-[270px] md:min-h-[336px] overflow-hidden">
 		<Image
 			src={product.image}
 			alt={product.name}
 			loading="lazy"
-			class={`w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-8 ${product.imageDimensions}`}
+			class={`w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-8 ${product.imageDimensions}`}
 		/>
 	</div>
 
@@ -50,7 +50,7 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 	<div class="mt-auto flex justify-center gap-2 px-4">
 		<button
 			type="button"
-			class="price-toggle flex items-center justify-center rounded-full bg-gradient-to-r from-brand-pink to-brand-purple w-[119px] h-[35px] text-[14px] text-white uppercase cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
+			class="price-toggle flex items-center justify-center rounded-full bg-gradient-to-r from-[#C570AD] to-[#3e55a5] w-[119px] h-[35px] text-[14px] text-white uppercase cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95"
 			aria-haspopup="dialog"
 		>
 			Ver precios
