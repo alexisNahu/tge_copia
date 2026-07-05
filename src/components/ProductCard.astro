@@ -32,12 +32,12 @@ const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 	}
 
 	{/* Contenedor de la imagen */}
-	<div class="w-full flex items-center justify-center p-4 min-h-[270px] md:min-h-[350px]">
+	<div class="w-full flex items-center justify-center p-4 min-h-[270px] md:min-h-[336px]">
 		<Image
 			src={product.image}
 			alt={product.name}
 			loading="lazy"
-			class={`w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110 ${product.imageDimensions}`}
+			class={`w-auto h-auto max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-8 ${product.imageDimensions}`}
 		/>
 	</div>
 
