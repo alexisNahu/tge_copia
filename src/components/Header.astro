@@ -3,7 +3,6 @@ import logo from '../assets/logo_fontotransparente.png';
 import facebook from '../assets/facebook_blanco.png';
 import instagram from '../assets/ig_blanco.png';
 import {Image} from 'astro:assets'
-import descarga from '../assets/descarga.png';
 const navLinks = [{ label: 'Descargar el catálogo', href: 'https://www.tge.com.py/catalogo/Catalogo-TGE-2026.pdf' }];
 const social = [
 	{ label: 'Facebook', href: 'https://www.facebook.com/share/1EhyVZGdbs/?mibextid=wwXIfr', icon: facebook },
@@ -16,6 +15,27 @@ const social = [
 		<Image src={logo} alt="TGE Electrodomésticos" class="md:h-[90px] md:w-[119px] h-11 w-auto" />
 	</a>
 
+	<div
+		id="mobile-menu"
+		class="absolute inset-x-0 top-full flex -translate-y-4 flex-col items-center gap-4 bg-white/98 px-6 py-8 opacity-0 shadow-xl pointer-events-none transition-[opacity,transform] duration-300 ease-out sm:hidden rounded-b-2xl"
+	>
+		{
+			navLinks.map((link) => (
+				<a
+					href={link.href}
+					download="Catalogo-TGE-2026.pdf"
+					target="_blank"
+					class="flex w-full max-w-[320px] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#C570AD] to-[#3e55a5] px-6 py-3 text-[14px] font-bold uppercase tracking-wide text-white shadow-md transition-transform duration-200 hover:scale-105 active:scale-95"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-4 w-4">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 12m0 0l4.5-4.5M12 12V3" />
+					</svg>
+					{link.label}
+				</a>
+			))
+		}
+	</div>
+
 	<div class="flex items-center gap-6 sm:gap-[28px]">
 		{
 			navLinks.map((link) => (
@@ -23,8 +43,11 @@ const social = [
 					href={link.href}
 					download="Catalogo-TGE-2026.pdf"
 					target="_blank"
-					class="hidden text-[20px] text-white uppercase transition-colors duration-200 hover:text-white/80 sm:inline"
+					class="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#C570AD] to-[#3e55a5] px-6 py-3 text-[14px] font-bold uppercase tracking-wide text-white shadow-md transition-transform duration-200 hover:scale-105 active:scale-95 sm:flex"
 				>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-4 w-4">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 12m0 0l4.5-4.5M12 12V3" />
+					</svg>
 					{link.label}
 				</a>
 			))
@@ -46,32 +69,48 @@ const social = [
 			}
 		</div>
 
-		{
-			navLinks.map((link) => (
-				/* CAMBIOS CLAVE:
-                   - 'flex-col gap-0.5': Alinea el ícono arriba y el texto abajo con un espacio mínimo.
-                   - Se eliminaron h-11 y w-11 del <a> para permitir el crecimiento vertical por el texto.
-                */
-				<a
-					href={link.href}
-					download="Catalogo-TGE-2026.pdf"
-					target="_blank"
-					aria-label={link.label}
-					class="flex flex-col items-center justify-center shrink-0 transition-transform duration-200 hover:scale-110 active:scale-95 sm:hidden"
-				>
-					<Image
-						src={descarga}
-						alt="Descargar catálogo"
-						class="h-8 w-8 object-contain brightness-0 invert"
-					/>
-					<span class="text-[10px] text-white font-semibold uppercase tracking-wider mt-0.5">
-                   Catálogo
-                </span>
-				</a>
-			))
-		}
+		<button
+			type="button"
+			id="mobile-menu-toggle"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+			aria-label="Abrir menú"
+			class="relative flex h-8 w-8 shrink-0 items-center justify-center sm:hidden z-30"
+		>
+			<span class="absolute left-1/2 top-1/2 h-0.5 w-6 -translate-x-1/2 -translate-y-2 rounded-full bg-white transition-transform duration-300 ease-in-out"></span>
+			<span class="absolute left-1/2 top-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-white transition-opacity duration-200 ease-in-out"></span>
+			<span class="absolute left-1/2 top-1/2 h-0.5 w-6 -translate-x-1/2 translate-y-2 rounded-full bg-white transition-transform duration-300 ease-in-out"></span>
+		</button>
 	</div>
 </header>
+<script>
+	const menuToggle = document.getElementById('mobile-menu-toggle');
+	const mobileMenu = document.getElementById('mobile-menu');
+	const [barTop, barMid, barBottom] = menuToggle?.querySelectorAll('span') ?? [];
+
+	function setMenuOpen(isOpen: boolean) {
+		mobileMenu?.classList.toggle('opacity-0', !isOpen);
+		mobileMenu?.classList.toggle('-translate-y-4', !isOpen);
+		mobileMenu?.classList.toggle('pointer-events-none', !isOpen);
+
+		barTop?.classList.toggle('-translate-y-2', !isOpen);
+		barTop?.classList.toggle('rotate-45', isOpen);
+		barMid?.classList.toggle('opacity-0', isOpen);
+		barBottom?.classList.toggle('translate-y-2', !isOpen);
+		barBottom?.classList.toggle('-rotate-45', isOpen);
+
+		menuToggle?.setAttribute('aria-expanded', String(isOpen));
+		menuToggle?.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+	}
+
+	menuToggle?.addEventListener('click', () => {
+		setMenuOpen(mobileMenu?.classList.contains('opacity-0') ?? false);
+	});
+
+	mobileMenu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => setMenuOpen(false));
+	});
+</script>
 
 <div
 	id="sticky-nav"
