@@ -3,7 +3,7 @@ import logo from '../assets/logo_fontotransparente.png';
 import facebook from '../assets/facebook_blanco.png';
 import instagram from '../assets/ig_blanco.png';
 import {Image} from 'astro:assets'
-const navLinks = [{ label: 'Descargar el catálogo', href: '#' }];
+const navLinks = [{ label: 'Descargar el catálogo', href: 'https://www.tge.com.py/catalogo/Catalogo-TGE-2026.pdf' }];
 const social = [
 	{ label: 'Facebook', href: 'https://www.facebook.com/share/1EhyVZGdbs/?mibextid=wwXIfr', icon: facebook },
 	{ label: 'Instagram', href: 'https://www.instagram.com/tg_electrodomesticos/', icon: instagram },
@@ -17,8 +17,11 @@ const social = [
 	<div class="flex items-center gap-[28px]">
 		{
 			navLinks.map((link) => (
+				/* CAMBIO AQUÍ: Se agregó 'download' y 'target="_blank"' */
 				<a
 					href={link.href}
+					download="Catalogo-TGE-2026.pdf"
+					target="_blank"
 					class="hidden text-[20px] text-white uppercase transition-colors duration-200 hover:text-white/80 sm:inline"
 				>
 					{link.label}
@@ -54,8 +57,11 @@ const social = [
 		<div class="flex items-center gap-5">
 			{
 				navLinks.map((link) => (
+					/* CAMBIO AQUÍ: Se agregó también al menú sticky para que funcione igual */
 					<a
 						href={link.href}
+						download="Catalogo-TGE-2026.pdf"
+						target="_blank"
 						class="hidden text-xs font-semibold tracking-wide text-brand-indigo uppercase transition-colors duration-200 hover:text-brand-purple sm:inline"
 					>
 						{link.label}
