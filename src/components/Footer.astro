@@ -9,8 +9,8 @@ import seg from '../assets/2.png';
 import ter from '../assets/3.png';
 const requisitos = ['Cédula de identidad', 'Dirección', 'Comprobantes de ingresos', 'Inforconf'];
 const social = [
-	{ label: 'Facebook', href: '#', icon: facebook },
-	{ label: 'Instagram', href: '#', icon: instagram },
+	{ label: 'Facebook', href: 'https://www.facebook.com/share/1EhyVZGdbs/?mibextid=wwXIfr', icon: facebook },
+	{ label: 'Instagram', href: 'https://www.instagram.com/tg_electrodomesticos/', icon: instagram },
 ];
 ---
 
@@ -77,6 +77,8 @@ const social = [
 				social.map((item) => (
 					<a
 						href={item.href}
+						target="_blank"
+						rel="noopener noreferrer"
 						aria-label={item.label}
 						class="flex items-center justify-center transition-transform hover:scale-105"
 					>
