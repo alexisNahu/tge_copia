@@ -2,22 +2,31 @@
 import logo from '../assets/logo_fontotransparente.png';
 import facebook from '../assets/facebook_blanco.png';
 import instagram from '../assets/ig_blanco.png';
+import facebookColor from '../assets/uil_facebook.png';
+import instagramColor from '../assets/streamline_instagram-solid.png';
 import {Image} from 'astro:assets'
 const navLinks = [{ label: 'Descargar el catálogo', href: 'https://www.tge.com.py/catalogo/Catalogo-TGE-2026.pdf' }];
 const social = [
 	{ label: 'Facebook', href: 'https://www.facebook.com/share/1EhyVZGdbs/?mibextid=wwXIfr', icon: facebook },
 	{ label: 'Instagram', href: 'https://www.instagram.com/tg_electrodomesticos/', icon: instagram },
 ];
+const socialColor = [
+	{ label: 'Facebook', href: 'https://www.facebook.com/share/1EhyVZGdbs/?mibextid=wwXIfr', icon: facebookColor },
+	{ label: 'Instagram', href: 'https://www.instagram.com/tg_electrodomesticos/', icon: instagramColor },
+];
 ---
 
-<header class="absolute inset-x-0 top-0 z-20 flex p-6 md:px-24 min-[1636px]:px-0! w-full items-center justify-between md:mt-[52px] mt-3 max-w-[1636px] mx-auto bg-transparent">
+<header
+	id="site-header"
+	class="fixed inset-x-0 top-0 z-50 mx-auto flex w-full max-w-[1636px] items-center justify-between bg-brand-indigo/95 backdrop-blur-md shadow-lg p-6 mt-0 transition-[background-color,box-shadow,margin,padding] duration-300 ease-out sm:bg-transparent sm:shadow-none sm:backdrop-blur-none sm:mt-3 md:mt-[52px] md:px-24 min-[1636px]:px-0!"
+>
 	<a href="#top" class="block transition-transform duration-300 hover:scale-105">
-		<Image src={logo} alt="TGE Electrodomésticos" class="md:h-[90px] md:w-[119px] h-11 w-auto" />
+		<Image src={logo} alt="TGE Electrodomésticos" id="site-logo" class="h-11 w-auto transition-[height] duration-300 md:h-[90px] md:w-[119px]" />
 	</a>
 
 	<div
 		id="mobile-menu"
-		class="absolute inset-x-0 top-full flex -translate-y-4 flex-col items-center gap-4 bg-white/98 px-6 py-8 opacity-0 shadow-xl pointer-events-none transition-[opacity,transform] duration-300 ease-out sm:hidden rounded-b-2xl"
+		class="absolute inset-x-0 top-full flex -translate-y-4 flex-col items-center gap-4 bg-brand-indigo/95 backdrop-blur-md px-6 py-8 opacity-0 shadow-xl pointer-events-none transition-[opacity,transform] duration-300 ease-out sm:hidden rounded-b-2xl"
 	>
 		{
 			navLinks.map((link) => (
@@ -34,6 +43,23 @@ const social = [
 				</a>
 			))
 		}
+
+		{/* Redes sociales visibles ÚNICAMENTE al abrir la hamburguesa */}
+		<div class="flex items-center gap-4 mt-2">
+			{
+				socialColor.map((item) => (
+					<a
+						href={item.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={item.label}
+						class="flex items-center justify-center rounded transition-transform duration-200 hover:scale-110"
+					>
+						<Image src={item.icon} alt="" class="h-11 w-11 object-contain" />
+					</a>
+				))
+			}
+		</div>
 	</div>
 
 	<div class="flex items-center gap-6 sm:gap-[28px]">
@@ -53,7 +79,7 @@ const social = [
 			))
 		}
 
-		<div class="flex items-center gap-2">
+		<div class="hidden sm:flex items-center gap-2">
 			{
 				social.map((item) => (
 					<a
@@ -63,7 +89,7 @@ const social = [
 						aria-label={item.label}
 						class="flex h-full w-full items-center justify-center rounded transition-transform duration-200 hover:scale-110"
 					>
-						<Image src={item.icon} alt="" class="h-11 w-11 object-contain sm:h-[55px] sm:w-[55px]" />
+						<Image src={item.icon} alt="" class="h-[55px] w-[55px] object-contain" />
 					</a>
 				))
 			}
@@ -83,7 +109,33 @@ const social = [
 		</button>
 	</div>
 </header>
+
 <script>
+	const header = document.getElementById('site-header');
+	const logo = document.getElementById('site-logo');
+	const SCROLL_THRESHOLD = 40;
+
+	function updateHeaderOnScroll() {
+		const isScrolled = window.scrollY > SCROLL_THRESHOLD;
+
+		header?.classList.toggle('sm:bg-brand-indigo/95', isScrolled);
+		header?.classList.toggle('sm:backdrop-blur-md', isScrolled);
+		header?.classList.toggle('sm:shadow-lg', isScrolled);
+		header?.classList.toggle('sm:bg-transparent', !isScrolled);
+		header?.classList.toggle('sm:backdrop-blur-none', !isScrolled);
+		header?.classList.toggle('sm:shadow-none', !isScrolled);
+
+		header?.classList.toggle('sm:mt-3', !isScrolled);
+		header?.classList.toggle('md:mt-[52px]', !isScrolled);
+
+		logo?.classList.toggle('md:h-[90px]', !isScrolled);
+		logo?.classList.toggle('md:w-[119px]', !isScrolled);
+		logo?.classList.toggle('md:h-14', isScrolled);
+	}
+
+	updateHeaderOnScroll();
+	window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
+
 	const menuToggle = document.getElementById('mobile-menu-toggle');
 	const mobileMenu = document.getElementById('mobile-menu');
 	const [barTop, barMid, barBottom] = menuToggle?.querySelectorAll('span') ?? [];
@@ -111,43 +163,3 @@ const social = [
 		link.addEventListener('click', () => setMenuOpen(false));
 	});
 </script>
-
-<div
-	id="sticky-nav"
-	class="fixed inset-x-0 top-0 z-50 -translate-y-full transition-transform duration-300 ease-out bg-transparent box-border"
->
-	<div class="flex items-center justify-between px-6 py-3 sm:px-12">
-		<a href="#top" class="block transition-transform duration-300 hover:scale-105">
-			<Image src={logo} alt="TGE Electrodomésticos" class="h-8 w-auto" />
-		</a>
-		<div class="flex items-center gap-5">
-			{
-				navLinks.map((link) => (
-					<a
-						href={link.href}
-						download="Catalogo-TGE-2026.pdf"
-						target="_blank"
-						class="hidden text-xs font-semibold tracking-wide text-brand-indigo uppercase transition-colors duration-200 hover:text-brand-purple sm:inline"
-					>
-						{link.label}
-					</a>
-				))
-			}
-			<div class="flex items-center gap-2">
-				{
-					social.map((item) => (
-						<a
-							href={item.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={item.label}
-							class="flex h-16 w-16 items-center justify-center rounded p-1.5 transition-transform duration-200 hover:scale-110"
-						>
-							<Image src={item.icon} alt="" class="h-full w-full object-contain" />
-						</a>
-					))
-				}
-			</div>
-		</div>
-	</div>
-</div>
