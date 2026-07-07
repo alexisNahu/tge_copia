@@ -18,7 +18,7 @@ const socialColor = [
 
 <header
 	id="site-header"
-	class="fixed inset-x-0 top-0 z-50 mx-auto flex w-full max-w-[1636px] items-center justify-between bg-brand-indigo/95 backdrop-blur-md shadow-lg p-6 mt-0 transition-[background-color,box-shadow,margin,padding] duration-300 ease-out sm:bg-transparent sm:shadow-none sm:backdrop-blur-none sm:mt-3 md:mt-[52px] md:px-24 min-[1636px]:px-0!"
+	class="fixed inset-x-0 top-0 z-50 mx-auto flex w-full max-w-[1636px] items-center justify-between p-6 transition-[background-color,box-shadow,padding,transform] duration-300 ease-out bg-brand-indigo/95 shadow-md sm:absolute sm:bg-transparent sm:shadow-none sm:mt-3 md:mt-[52px] md:px-24 min-[1636px]:px-0!"
 >
 	<a href="#top" class="block transition-transform duration-300 hover:scale-105">
 		<Image src={logo} alt="TGE Electrodomésticos" id="site-logo" class="h-11 w-auto transition-[height] duration-300 md:h-[90px] md:w-[119px]" />
@@ -44,7 +44,6 @@ const socialColor = [
 			))
 		}
 
-		{/* Redes sociales visibles ÚNICAMENTE al abrir la hamburguesa */}
 		<div class="flex items-center gap-4 mt-2">
 			{
 				socialColor.map((item) => (
@@ -115,27 +114,45 @@ const socialColor = [
 	const logo = document.getElementById('site-logo');
 	const SCROLL_THRESHOLD = 40;
 
+	// Guardamos el último scroll para detectar si va hacia arriba o hacia abajo en mobile
+	let lastScrollY = window.scrollY;
+
 	function updateHeaderOnScroll() {
-		const isScrolled = window.scrollY > SCROLL_THRESHOLD;
+		// Verificamos si estamos en mobile (ancho de pantalla menor a 640px, que es 'sm' en Tailwind)
+		if (window.innerWidth >= 640) {
+			// Si estamos en PC, limpiamos cualquier clase de scroll móvil para que no rompa el diseño
+			header?.classList.remove('bg-brand-indigo/80', 'backdrop-blur-md', 'p-3', '-translate-y-full');
+			logo?.classList.remove('h-8');
+			return;
+		}
 
-		header?.classList.toggle('sm:bg-brand-indigo/95', isScrolled);
-		header?.classList.toggle('sm:backdrop-blur-md', isScrolled);
-		header?.classList.toggle('sm:shadow-lg', isScrolled);
-		header?.classList.toggle('sm:bg-transparent', !isScrolled);
-		header?.classList.toggle('sm:backdrop-blur-none', !isScrolled);
-		header?.classList.toggle('sm:shadow-none', !isScrolled);
+		const currentScrollY = window.scrollY;
+		const isScrolled = currentScrollY > SCROLL_THRESHOLD;
 
-		header?.classList.toggle('sm:mt-3', !isScrolled);
-		header?.classList.toggle('md:mt-[52px]', !isScrolled);
+		// Efecto visual: Reduce padding y añade más blur al hacer scroll hacia abajo
+		header?.classList.toggle('bg-brand-indigo/90', isScrolled);
+		header?.classList.toggle('backdrop-blur-md', isScrolled);
+		header?.classList.toggle('p-3', isScrolled);
+		logo?.classList.toggle('h-8', isScrolled);
 
-		logo?.classList.toggle('md:h-[90px]', !isScrolled);
-		logo?.classList.toggle('md:w-[119px]', !isScrolled);
-		logo?.classList.toggle('md:h-14', isScrolled);
+		// Efecto de ocultar/mostrar dinámico en mobile al scrollear
+		if (currentScrollY > lastScrollY && currentScrollY > 120) {
+			// Scrolleando hacia abajo: ocultamos el header para dar más espacio de lectura
+			header?.classList.add('-translate-y-full');
+		} else {
+			// Scrolleando hacia arriba: reaparece el header de golpe
+			header?.classList.remove('-translate-y-full');
+		}
+
+		lastScrollY = currentScrollY;
 	}
 
+	// Ejecutar al cargar y escuchar al evento de scroll y resize
 	updateHeaderOnScroll();
 	window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
+	window.addEventListener('resize', updateHeaderOnScroll, { passive: true });
 
+	// Lógica del botón hamburguesa
 	const menuToggle = document.getElementById('mobile-menu-toggle');
 	const mobileMenu = document.getElementById('mobile-menu');
 	const [barTop, barMid, barBottom] = menuToggle?.querySelectorAll('span') ?? [];
